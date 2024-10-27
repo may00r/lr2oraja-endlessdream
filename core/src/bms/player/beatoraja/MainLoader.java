@@ -117,14 +117,6 @@ public class MainLoader extends Application {
             }
         }
 
-		for(SongData song : getScoreDatabaseAccessor().getSongDatas(SongUtils.illegalsongs)) {
-			MainLoader.putIllegalSong(song.getSha256());
-		}
-		if(illegalSongs.size() > 0) {
-			JOptionPane.showMessageDialog(null, "This Application detects " + illegalSongs.size() + " illegal BMS songs. \n Remove them, update song database and restart.", "Error", JOptionPane.ERROR_MESSAGE);
-			System.exit(1);
-		}
-
 		try {
 			MainController main = new MainController(bmsPath, config, player, playerMode, songUpdated);
 
@@ -235,16 +227,12 @@ public class MainLoader extends Application {
 		return bmsPath;
 	}
 
-	public static void putIllegalSong(String hash) {
-		illegalSongs.add(hash);
-	}
-
 	public static String[] getIllegalSongs() {
-		return illegalSongs.toArray(new String[illegalSongs.size()]);
+		return new String[0];
 	}
 
 	public static int getIllegalSongCount() {
-		return illegalSongs.size();
+		return 0;
 	}
 
 	@Override
